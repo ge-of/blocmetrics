@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
+  resources :events, only: [:index, :show]
+  resources :registered_applications
+
+  devise_for :users
+  resources :users, only: [:show]
   root to: 'home#index'
   get 'home/index'
 
   get 'home/about'
-
-  devise_for :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
