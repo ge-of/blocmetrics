@@ -1,7 +1,6 @@
 # Create Users
 3.times do
   user = User.new(
-    name: Faker::Name.name,
     email: Faker::Internet.email,
     password: Faker::Lorem.characters(8)
     )
@@ -13,7 +12,6 @@ users = User.all
 
 # Create a member
 member = User.new(
-  name: 'Member User',
   email: 'member@example.com',
   password: 'helloworld'
   )
@@ -34,35 +32,13 @@ registered_applications = RegisteredApplication.all
 
 registered_applications.each do | registered_application |
   # Create Events
-  Event.create!(
+  5.times do
+    Event.create!(
     registered_application: registered_application,
     user_id: registered_application.user_id,
-    name: "Level 1"
+    name: Faker::Lorem.word
     )
-
-  Event.create!(
-    registered_application: registered_application,
-    user_id: registered_application.user_id,
-    name: "Level 2"
-    )
-
-  Event.create!(
-    registered_application: registered_application,
-    user_id: registered_application.user_id,
-    name: "Level 3"
-    )
-
-  Event.create!(
-    registered_application: registered_application,
-    user_id: registered_application.user_id,
-    name: "Level 4"
-    )
-
-  Event.create!(
-    registered_application: registered_application,
-    user_id: registered_application.user_id,
-    name: "Level 5"
-    )
+  end
 end
 
 puts "#{User.count} users created"
