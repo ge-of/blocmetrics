@@ -19,6 +19,6 @@
 
     <%= pie_chart @registered_application.events.group(:name).count %>
 
-    <%= line_chart @registered_application.events.group_by_day(:created_at), discrete: true %>
+    <%= line_chart @registered_application.events.group_by_day(:created_at).count %>
 
 <% end %>
