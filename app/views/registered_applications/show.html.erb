@@ -1,3 +1,5 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
 <%= content_tag_for :div, @registered_application do %>
   <div align="center">
     <h1>
@@ -9,12 +11,14 @@
         <%= link_to "Delete", registered_application_path(@registered_application), method: :delete, remote: true, class: 'btn btn-danger' %>
       <% end %>
   </div>
-  <h1> Events </h1>
-  <h3> Event Count <%= @events.count %></h3>
-  <% @events.each do |name, events| %>
-    <div>
-      <%= name %>
-    </div>
+  <h3>Events</h3>
+  <hr />
+  <% @events.each do |event, count| %>
+    <h4><%= "#{event}" %></h4>
   <% end %>
-</br>
+
+    <%= pie_chart @registered_application.events.group(:name).count %>
+
+    <%= line_chart @registered_application.events.group_by_day(:created_at).count %>
+
 <% end %>
